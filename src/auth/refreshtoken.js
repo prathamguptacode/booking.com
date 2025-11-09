@@ -14,11 +14,13 @@ router.post('/refresh',(req,res)=>{
     // } catch (error) {
     //     res.send(error)
     // }
-    console.log(req.cookies.refreshToken)
+    // console.log(req.cookies.refreshToken)
+    const refreshToken=req.cookies.refreshToken
+    if(!refreshToken) return res.status(404).send('refresh token in cookies not found')
 
-    jwt.verify(req.cookies.refreshToken,process.env.REFRESHKEY,(err,val)=>{
-        if(err) return res.send(err)
-        const accessToken=jwt.sign({email: req.body.email},process.env.ACCESSKEY,{expiresIn: '5m'})
+    jwt.verify(refreshToken,process.env.REFRESHKEY,(err,val)=>{
+        if(err) return res.status(401).json({error:err, message: 'invalid refresh token'})
+        const accessToken=jwt.sign({email: val.email},process.env.ACCESSKEY,{expiresIn: '5m'})
         res.send(accessToken)   
     })
 
