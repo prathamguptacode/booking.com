@@ -1,0 +1,30 @@
+{
+  "name": "booking.com",
+  "version": "1.0.0",
+  "description": "i am trying to clone booking.com (so that you can find hotel for cheaper hahaha)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prathamguptacode/booking.com.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prathamguptacode/booking.com/issues"
+  },
+  "homepage": "https://github.com/prathamguptacode/booking.com#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "env": "^0.0.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.3",
+    "nodemailer": "^7.0.10",
+    "otp-generator": "^4.0.1"
+  }
+}
