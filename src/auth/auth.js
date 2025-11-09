@@ -91,7 +91,7 @@ router.post('/verify',async (req,res)=>{
         if(otpUser==otp){
             const user = new User(userObj)
             await user.save()
-            const accessToken=jwt.sign({email: userObj.email},process.env.ACCESSKEY,{expiresIn: '5m'})
+            const accessToken=jwt.sign({email: userObj.email},process.env.ACCESSKEY,{expiresIn: '15m'})
             const refreshToken=jwt.sign({email: userObj.email},process.env.REFRESHKEY)
             res.cookie('refreshToken',refreshToken,{maxAge:'2800000000', httpOnly:true})
             res.json({message:"your account have been created successfully", token:accessToken})
@@ -109,8 +109,14 @@ router.post('/verify',async (req,res)=>{
 
 router.get('/login',async (req,res)=>{
     try {
+        if(!req.body.email) return res.status(404).send('enter a valid email')
         if(!await User.findOne({email: req.body.email})) return res.send('cannot find your account go to signup')
-        res.send(`user authenticated ${req.body.email}`)
+        // res.send(`user authenticated ${req.body.email}`)
+        const accessToken=jwt.sign({email: req.body.email},process.env.ACCESSKEY,{expiresIn: '15m'})
+        const refreshToken=jwt.sign({email: req.body.email},process.env.REFRESHKEY)
+        res.cookie('refreshToken',refreshToken,{maxAge:'2800000000', httpOnly:true})
+        res.json({message:"you have been logged in successfully", token:accessToken})
+
     } catch (error) {
         console.log('something went wrong in login')
         console.error(error)

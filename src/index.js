@@ -17,4 +17,14 @@ app.use('/api',restrictedArea)
 const refresh=require('./auth/refreshtoken')
 app.use('/api',refresh)
 
+const addProperty=require('./routes/addProperty')
+app.use('/api',addProperty)
+
+const viewProperty=require('./routes/viewProperty')
+app.use('/api',viewProperty)
+
+const viewPropertybycity=require('./routes/viewPropertybycity')
+app.use('/api',viewPropertybycity)
+
+
 app.listen(process.env.PORT,()=> console.log('hello world'))
