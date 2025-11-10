@@ -44,7 +44,9 @@ router.post('/signup',async (req,res)=>{
 function sendOtp(email){
     try {
 
-        otp=otpgenerator.generate(6,{upperCaseAlphabets:false, specialChars:false, lowerCaseAlphabets:false})
+        otp=otpgenerator.generate(6,{upperCaseAlphabets:false, specialChars:false, 
+        lowerCaseAlphabets:false})
+        console.log(otp)
         const transport=nodemailer.createTransport({
             service: 'gmail',
             auth:{
@@ -60,7 +62,7 @@ function sendOtp(email){
         }
         transport.sendMail(mailOption,(err,val)=>{
             if(err){
-                console.error('something went wrong')
+                console.error('something went wrong in sending otp')
             }
             else{
                 console.log(`email send to ${email}`+val)

@@ -5,9 +5,10 @@ const router = express.Router()
 
 router.get('/viewpropertybycity', async (req, res) => {
     try {
-        if (!req.body.city) return res.status(403).json({ message: 'please enter a city name' })
-        const city = req.body.city;
-        const properties = await Property.find({ city: city })
+        if (!req.body?.city) return res.status(403).json({ message: 'please enter a city name' })
+        const tempcity = req.body.city;
+        const city = tempcity.toLowerCase()
+        const properties = await Property.where('city').equals(city).sort({review:-1})
         res.json({ properties: properties })
 
     } catch (error) {

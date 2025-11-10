@@ -26,5 +26,23 @@ app.use('/api',viewProperty)
 const viewPropertybycity=require('./routes/viewPropertybycity')
 app.use('/api',viewPropertybycity)
 
+const viewPropertybyprice=require('./routes/viewPropertybyprice')
+app.use('/api',viewPropertybyprice)
+
+const viewPropertybytype=require('./routes/viewPropertybytype')
+app.use('/api',viewPropertybytype)
+
+const viewPropertybyname=require('./routes/viewPropertybyname')
+app.use('/api',viewPropertybyname)
+
+const cookies=require('./routes/cookie')
+app.use('/api',cookies)
+
+const review=require('./routes/review')
+app.use('/api',review)
+
+const comment=require('./routes/comment')
+app.use('/api',comment)
+
 
 app.listen(process.env.PORT,()=> console.log('hello world'))

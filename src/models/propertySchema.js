@@ -2,22 +2,33 @@ const mongoose = require('mongoose')
 const schema = new mongoose.Schema({
     name:{//name is required
         type:String,
-        required:true
+        required:true,
+        lowercase: true
     },
     description:String,
-    propertyType:String,
+    propertyType:{
+        type:String,
+        lowercase: true,
+        default: ''
+    },
     address:{//adress is requires
         type:String,
         required:true
     },
-    popularFacilities:String,
+    popularFacilities:[String],
     price:{//price is required
         type:Number,
         required:true
     },
-    review:Number,
-    comment:[String],
-    popularActivities:String,
+    review:{
+        type:Number,
+        default:0
+    },
+    comment:{
+        type: [String],
+        default:[]
+    },
+    popularActivities:[String],
     owner:{//owner details required
         type:mongoose.SchemaTypes.ObjectId,
         ref:'users',
@@ -25,7 +36,8 @@ const schema = new mongoose.Schema({
     },
     city:{
         type:String,
-        required:true
+        required:true,
+        lowercase: true
     }
 })
 const propertySchema = mongoose.model('property',schema)
